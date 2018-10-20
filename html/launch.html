@@ -30,9 +30,11 @@
       var obj = JSON.parse(response);
       var title = document.createElement('h3');
       title.innerHTML = obj.launches[0].name;
+      document.getElementById("launch").appendChild(title);
 
       var date = document.createElement('p');
       date.innerHTML = obj.launches[0].windowstart;
+      document.getElementById("launch").appendChild(date);
 
       var statusEl = document.createElement('p');
       var status = obj.launches[0].status;
@@ -50,26 +52,32 @@
           statusEl.style = "background-color: gray";
           break;
       }
+      document.getElementById("launch").appendChild(statusEl);
 
       var description = document.createElement('p');
-      var readMore = document.createElement('a');
-
-      description.innerHTML = obj.launches[0].missions[0].description;
-      readMore.innerHTML = "Read more";
-      readMore.setAttribute("href", obj.launches[0].missions[0].wikiURL);
-
-      document.getElementById("launch").appendChild(title);
-      document.getElementById("launch").appendChild(date);
-      document.getElementById("launch").appendChild(statusEl);
+      if (!obj.launches[0].missions[0].wikiURL.trim().length == 0) {
+        console.log("test");
+        description.innerHTML = obj.launches[0].missions[0].description + '<a href="' +  obj.launches[0].missions[0].wikiURL + '">Read More</a>';
+      }
+      else {
+        description.innerHTML = obj.launches[0].missions[0].description;
+      }
       document.getElementById("launch").appendChild(description);
-      
-      console.log(readMore.innerHTML);
-      console.log(readMore.innerHTML.length);
-      console.log(trim(readMore.innerHTML));
-      console.log(trim(readMore.innerHTML).length);
 
-      if (!trim(readMore.innerHTML).length == 0) {
-        document.getElementById("launch").appendChild(readMore);
+
+      var agency = document.createElement('p');
+      agency.innerHTML = obj.launches[0].missions[0].agencies[0].abbrev + " - " + obj.launches[0].missions[0].agencies[0].name + '<a href="' + obj.launches[0].missions[0].agencies[0].wikiURL + '"> About</a>';
+      document.getElementById("launch").appendChild(agency);
+
+      var location = document.createElement('p');
+      location.innerHTML = obj.launches[0].location.pads[0].name;
+      document.getElementById("launch").appendChild(location);
+
+      for (var i = 0; i < obj.launches[0].vidURLs.length; i++) {
+        var videoUrl = document.createElement('a');
+        videoUrl.innerHTML = obj.launches[0].vidURLs[i];
+        videoUrl.setAttribute("href", obj.launches[0].vidURLs[i]);
+        document.getElementById("launch").appendChild(videoUrl);
       }
     }
     </script>
