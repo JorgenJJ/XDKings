@@ -53,12 +53,16 @@
     function jsonParser(response) {
       var obj = JSON.parse(response);
       var title = document.createElement('h3');
-      title.innerHTML = obj.launches[0].name;
-
       var date = document.createElement('p');
+      var statusEl = document.createElement('p');
+      var description = document.createElement('p');
+      var agency = document.createElement('p');
+      var location = document.createElement('p');
+      var videoUrl = document.createElement('p');
+
+      title.innerHTML = obj.launches[0].name;
       date.innerHTML = obj.launches[0].windowstart;
 
-      var statusEl = document.createElement('p');
       var status = obj.launches[0].status;
       switch (status) {
         case 1:
@@ -75,26 +79,29 @@
           break;
       }
 
-      var description = document.createElement('p');
-      if (!obj.launches[0].missions[0].wikiURL.trim().length == 0) {
-        description.innerHTML = obj.launches[0].missions[0].description + '<a href="' +  obj.launches[0].missions[0].wikiURL + '">Read More</a>';
-      }
-      else {
-        description.innerHTML = obj.launches[0].missions[0].description;
-      }
 
-      var agency = document.createElement('p');
-      if (obj.launches[0].missions[0].agencies != null && obj.launches[0].missions[0].agencies.length != 0) {
-        agency.innerHTML = obj.launches[0].missions[0].agencies[0].abbrev + " - " + obj.launches[0].missions[0].agencies[0].name + '<a href="' + obj.launches[0].missions[0].agencies[0].wikiURL + '"> About</a>';
+      if (obj.launches[0].missions.length != 0 && obj.launches[0].missions != null) {
+        if (obj.launches[0].missions[0].wikiURL.trim().length != 0 && obj.launches[0].missions[0].wikiURL != null ) {
+          description.innerHTML = obj.launches[0].missions[0].description + '<a href="' +  obj.launches[0].missions[0].wikiURL + '">Read More</a>';
+        }
+        else {
+          description.innerHTML = obj.launches[0].missions[0].description;
+        }
+
+        if (obj.launches[0].missions[0].agencies != null && obj.launches[0].missions[0].agencies.length != 0) {
+          agency.innerHTML = obj.launches[0].missions[0].agencies[0].abbrev + " - " + obj.launches[0].missions[0].agencies[0].name + '<a href="' + obj.launches[0].missions[0].agencies[0].wikiURL + '"> About</a>';
+        }
+        else {
+          agency.innerHTML = "Unknown agency";
+        }
       }
       else {
+        description.innerHTML = "No description provided";
         agency.innerHTML = "Unknown agency";
       }
 
-      var location = document.createElement('p');
       location.innerHTML = obj.launches[0].location.pads[0].name;
 
-      var videoUrl = document.createElement('p');
       if (obj.launches[0].vidURLs.length != 0) {
         videoUrl.innerHTML = '<a href="' + obj.launches[0].vidURLs[0] + '">' + obj.launches[0].vidURLs[0] + '</a>';
       }
