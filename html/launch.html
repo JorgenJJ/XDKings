@@ -8,7 +8,29 @@
     <title>XDKings</title>
   </head>
   <body>
-    <div id="launch"></div>
+    <div id="header">
+        <a id="back" href="index.html">Back</a>
+    </div>
+    <div id="leftNav">
+    </div>
+    <div id="article">
+      <div id="launchDetails">
+        <div id="tags">
+          <h3 class="field">Mission name:</h3>
+          <h3 class="field">Mission time:</h3>
+          <h3 class="field">Status:</h3>
+          <h3 class="field">Description:</h3>
+          <h3 class="field">Agency:</h3>
+          <h3 class="field">Location:</h3>
+        </div>
+        <div id="launch">
+        </div>
+      </div>
+    </div>
+    <div id="rightNav">
+    </div>
+    <div id="footer">
+    </div>
   </body>
   <script>
     var query = window.location.search.substring(1);
@@ -30,29 +52,26 @@
       var obj = JSON.parse(response);
       var title = document.createElement('h3');
       title.innerHTML = obj.launches[0].name;
-      document.getElementById("launch").appendChild(title);
 
       var date = document.createElement('p');
       date.innerHTML = obj.launches[0].windowstart;
-      document.getElementById("launch").appendChild(date);
 
       var statusEl = document.createElement('p');
       var status = obj.launches[0].status;
       switch (status) {
         case 1:
-          statusEl.innerHTML = "Confirmed";
-          statusEl.style = "background-color: green";
+          statusEl.innerHTML = "Certain";
+          statusEl.style = "color: #0b6317";
           break;
         case 2:
-          statusEl.innerHTML = "Not confirmed";
-          statusEl.style = "background-color: red";
+          statusEl.innerHTML = "Uncertain";
+          statusEl.style = "color: #700606";
           break;
         default:
           statusEl.innerHTML = "Unknown";
-          statusEl.style = "background-color: gray";
+          statusEl.style = "color: #1e1c1c";
           break;
       }
-      document.getElementById("launch").appendChild(statusEl);
 
       var description = document.createElement('p');
       if (!obj.launches[0].missions[0].wikiURL.trim().length == 0) {
@@ -61,20 +80,32 @@
       else {
         description.innerHTML = obj.launches[0].missions[0].description;
       }
-      document.getElementById("launch").appendChild(description);
-
 
       var agency = document.createElement('p');
       agency.innerHTML = obj.launches[0].missions[0].agencies[0].abbrev + " - " + obj.launches[0].missions[0].agencies[0].name + '<a href="' + obj.launches[0].missions[0].agencies[0].wikiURL + '"> About</a>';
-      document.getElementById("launch").appendChild(agency);
 
       var location = document.createElement('p');
       location.innerHTML = obj.launches[0].location.pads[0].name;
+
+      title.setAttribute("class", "field");
+      date.setAttribute("class", "field");
+      statusEl.setAttribute("class", "field");
+      description.setAttribute("class", "field");
+      agency.setAttribute("class", "field");
+      location.setAttribute("class", "field");
+
+
+      document.getElementById("launch").appendChild(title);
+      document.getElementById("launch").appendChild(date);
+      document.getElementById("launch").appendChild(statusEl);
+      document.getElementById("launch").appendChild(description);
+      document.getElementById("launch").appendChild(agency);
       document.getElementById("launch").appendChild(location);
 
       for (var i = 0; i < obj.launches[0].vidURLs.length; i++) {
         var videoUrl = document.createElement('a');
         videoUrl.innerHTML = obj.launches[0].vidURLs[i];
+        videoUrl.setAttribute("class", "field");
         videoUrl.setAttribute("href", obj.launches[0].vidURLs[i]);
         document.getElementById("launch").appendChild(videoUrl);
       }
