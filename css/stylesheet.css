@@ -100,9 +100,41 @@ body {
 #launchDetails {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto auto auto auto auto auto auto auto;
 }
 
 .field {
-  height: 50px;
+  margin: 10px;
+}
+
+#launchName {
+  grid-row: 1/2;
+}
+
+#launchDate {
+  grid-row: 2/3;
+}
+
+#launchStatus {
+  grid-row: 3/4;
+}
+
+#launchDescription {
+  grid-row: 4/5;
+}
+
+#launchAgency {
+  grid-row: 5/6;
+}
+
+#launchLocation {
+  grid-row: 6/7;
+}
+
+#launchVideo {
+  grid-row: 7/8;
+}
+
+#launchDistance {
+  grid-row: 8/9;
 }
