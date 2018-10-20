@@ -95,9 +95,13 @@ body {
 }
 
 #back {
-  color: white;
-  text-decoration: none;
+  margin: 5px;
   cursor: pointer;
+}
+
+#backLink {
+  text-decoration: none;
+  color: white;
 }
 
 #launchDetails {
