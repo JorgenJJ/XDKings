@@ -15,18 +15,18 @@
     </div>
     <div id="article">
       <div id="launchDetails">
-        <div id="tags">
-          <h3 class="field">Mission name:</h3>
-          <h3 class="field">Mission time:</h3>
-          <h3 class="field">Time confirmation:</h3>
-          <h3 class="field">Description:</h3>
-          <h3 class="field">Agency:</h3>
-          <h3 class="field">Location:</h3>
-          <h3 class="field">Livestream:</h3>
-          <h3 class="field">Distance:</h3>
-        </div>
-        <div id="launch">
-        </div>
+        <!--<div id="tags">-->
+          <h3 class="field" id="launchName">Mission name:</h3>
+          <h3 class="field" id="launchDate">Mission time:</h3>
+          <h3 class="field" id="launchStatus">Time confirmation:</h3>
+          <h3 class="field" id="launchDescription">Description:</h3>
+          <h3 class="field" id="launchAgency">Agency:</h3>
+          <h3 class="field" id="launchLocation">Location:</h3>
+          <h3 class="field" id="launchVideo">Livestream:</h3>
+          <h3 class="field" id="launchDistance">Distance:</h3>
+        <!--</div>-->
+        <!--<div id="launch">
+        </div>-->
       </div>
     </div>
     <div id="rightNav">
@@ -103,20 +103,27 @@
       }
 
       title.setAttribute("class", "field");
+      title.setAttribute("id", "launchName");
       date.setAttribute("class", "field");
+      date.setAttribute("id", "launchDate");
       statusEl.setAttribute("class", "field");
+      statusEl.setAttribute("id", "launchStatus");
       description.setAttribute("class", "field");
+      description.setAttribute("id", "launchDescription");
       agency.setAttribute("class", "field");
+      agency.setAttribute("id", "launchAgency");
       location.setAttribute("class", "field");
+      location.setAttribute("id", "launchLocation");
       videoUrl.setAttribute("class", "field");
+      videoUrl.setAttribute("id", "launchVideo");
 
-      document.getElementById("launch").appendChild(title);
-      document.getElementById("launch").appendChild(date);
-      document.getElementById("launch").appendChild(statusEl);
-      document.getElementById("launch").appendChild(description);
-      document.getElementById("launch").appendChild(agency);
-      document.getElementById("launch").appendChild(location);
-      document.getElementById("launch").appendChild(videoUrl);
+      document.getElementById("launchDetails").appendChild(title);
+      document.getElementById("launchDetails").appendChild(date);
+      document.getElementById("launchDetails").appendChild(statusEl);
+      document.getElementById("launchDetails").appendChild(description);
+      document.getElementById("launchDetails").appendChild(agency);
+      document.getElementById("launchDetails").appendChild(location);
+      document.getElementById("launchDetails").appendChild(videoUrl);
 
 
       locationCalculation(obj.launches[0].location.pads[0].latitude, obj.launches[0].location.pads[0].longitude);
@@ -145,14 +152,17 @@
 
         var distance = document.createElement('p');
         distance.setAttribute("class", "field");
+        distance.setAttribute("id", "launchDistance");
         distance.innerHTML = d.toFixed(2) + "km";
-        document.getElementById("launch").appendChild(distance);
+        document.getElementById("launchDetails").appendChild(distance);
       }
 
       function error(err) {
         var distance = document.createElement('p');
+        distance.setAttribute("class", "field");
+        distance.setAttribute("id", "launchDistance");
         distance.innerHTML = "Could not find your position";
-        document.getElementById("launch").appendChild(distance);
+        document.getElementById("launchDetails").appendChild(distance);
       }
 
       navigator.geolocation.getCurrentPosition(success, error, options);
