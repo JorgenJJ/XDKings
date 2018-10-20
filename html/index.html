@@ -73,7 +73,7 @@
           jDescTxt.setAttribute("class", "descText");
 
           jTitleTxt.innerHTML = obj.launches[i].name;
-          jTimeAndDate.innerHTML = obj.launches[i].windowstart;
+          jTimeAndDate.innerHTML = obj.launches[i].windowstart + " UTC";
           var status = obj.launches[i].status;
           switch (status) {
             case 1:
