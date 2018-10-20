@@ -140,12 +140,14 @@
         var d = R * c;
 
         var distance = document.createElement('p');
-        distance.innerHTML = d + "km";
+        distance.innerHTML = d.toFixed(2) + "km";
         document.getElementById("launch").appendChild(distance);
       }
 
       function error(err) {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
+        var distance = document.createElement('p');
+        distance.innerHTML = "Could not find your position";
+        document.getElementById("launch").appendChild(distance);
       }
 
       navigator.geolocation.getCurrentPosition(success, error, options);
