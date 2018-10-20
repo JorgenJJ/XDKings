@@ -82,7 +82,12 @@
       }
 
       var agency = document.createElement('p');
-      agency.innerHTML = obj.launches[0].missions[0].agencies[0].abbrev + " - " + obj.launches[0].missions[0].agencies[0].name + '<a href="' + obj.launches[0].missions[0].agencies[0].wikiURL + '"> About</a>';
+      if (obj.launches[0].missions[0].agencies != null) {
+        agency.innerHTML = obj.launches[0].missions[0].agencies[0].abbrev + " - " + obj.launches[0].missions[0].agencies[0].name + '<a href="' + obj.launches[0].missions[0].agencies[0].wikiURL + '"> About</a>';
+      }
+      else {
+        agency.innerHTML = "Unknown agency";
+      }
 
       var location = document.createElement('p');
       location.innerHTML = obj.launches[0].location.pads[0].name;
