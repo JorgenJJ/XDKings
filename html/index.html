@@ -8,6 +8,92 @@
     <title>XDKings</title>
   </head>
   <body>
-    XD
+    <div id="header">
+      <a href="https://nasa.gov">
+        <img src="../img/logo.png" height="30px;">
+      </a>
+    </div>
+    <div id="leftNav">
+    </div>
+    <div id="article">
+      <div id="countdown">
+        <h3 id="next">Next launch in:</h3>
+        <h1 id="counter">ALMOST</h1>
+      </div>
+      <div id="list">
+      </div>
+    </div>
+    <div id="rightNav">
+    </div>
+    <div id="footer">
+    </div>
+    <script>
+      async function countdownFunc(c) {
+        var s = Math.floor(c / 1000);
+        for (i = s; i >= 0; i--) {
+          var m = Math.floor(i / 60);
+          var h = Math.floor(m / 60);
+          if (h == 0) document.getElementById("counter").innerHTML = (m - h * 60) + ":" + (i - m * 60);
+          else if (h == 0 && m == 0) document.getElementById("counter").innerHTML = (i - m * 60);
+          else document.getElementById("counter").innerHTML = h + ":" + (m - h * 60) + ":" + (i - m * 60);
+          await sleep(1000);
+        }
+      }
+
+      /**
+      *  Pauses the script for the set time
+      @param milliseconds to pause
+      */
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function createLaunchBoxes() {
+        for (var i = 0; i < 6; i++) {
+          var jLaunchInfo = document.createElement("div");
+          var jTitle = document.createElement("div");
+          var jTitleTxt = document.createElement("h3");
+          var jTime = document.createElement("div");
+          var jTimeAndDate = document.createElement("p");
+          var jDescription = document.createElement("div");
+          var jDescTxt = document.createElement("p");
+
+          jLaunchInfo.setAttribute("class", "launchInfo");
+          jTitle.setAttribute("class", "title");
+          jTitleTxt.setAttribute("class", "titleTxt");
+          jTime.setAttribute("class", "time");
+          jTimeAndDate.setAttribute("class", "timeanddate");
+          jDescription.setAttribute("class", "description");
+          jDescTxt.setAttribute("class", "descText");
+
+          jTitleTxt.innerHTML = "title";
+          jTimeAndDate.innerHTML = "2018-10-21 00:00:00";
+          jDescTxt.innerHTML = "description";
+
+          if (i == 0) jTimeAndDate.setAttribute("id", "nextLaunch");
+
+          jTitle.appendChild(jTitleTxt);
+          jTime.appendChild(jTimeAndDate);
+          jDescription.appendChild(jDescTxt);
+          jLaunchInfo.appendChild(jTitleTxt);
+          jLaunchInfo.appendChild(jTime);
+          jLaunchInfo.appendChild(jDescription);
+          document.getElementById("list").appendChild(jLaunchInfo);
+        }
+      }
+
+      function setCounter() {
+        var next = new Date(document.getElementById("nextLaunch").innerHTML);
+        console.log(next);
+        var current = new Date();
+        console.log(current);
+        var count = Math.abs(next - current);
+        return count;
+      }
+
+      createLaunchBoxes();
+      var c = setCounter();
+      countdownFunc(c);
+    </script>
   </body>
 </html>
