@@ -94,13 +94,21 @@
       var location = document.createElement('p');
       location.innerHTML = obj.launches[0].location.pads[0].name;
 
+      var videoUrl = document.createElement('p');
+      if (obj.launches[0].vidURLs.length != 0) {
+        videoUrl.innerHTML = '<a href="' + obj.launches[0].vidURLs[0] + '">' + obj.launches[0].vidURLs[0] + '</a>';
+      }
+      else {
+        videoUrl.innerHTML = "We couldn't find any livestreams";
+      }
+
       title.setAttribute("class", "field");
       date.setAttribute("class", "field");
       statusEl.setAttribute("class", "field");
       description.setAttribute("class", "field");
       agency.setAttribute("class", "field");
       location.setAttribute("class", "field");
-
+      videoUrl.setAttribute("class", "field");
 
       document.getElementById("launch").appendChild(title);
       document.getElementById("launch").appendChild(date);
@@ -108,14 +116,8 @@
       document.getElementById("launch").appendChild(description);
       document.getElementById("launch").appendChild(agency);
       document.getElementById("launch").appendChild(location);
+      document.getElementById("launch").appendChild(videoUrl);
 
-      for (var i = 0; i < obj.launches[0].vidURLs.length; i++) {
-        var videoUrl = document.createElement('a');
-        videoUrl.innerHTML = obj.launches[0].vidURLs[i];
-        videoUrl.setAttribute("class", "field");
-        videoUrl.setAttribute("href", obj.launches[0].vidURLs[i]);
-        document.getElementById("launch").appendChild(videoUrl);
-      }
 
       locationCalculation(obj.launches[0].location.pads[0].latitude, obj.launches[0].location.pads[0].longitude);
     }
