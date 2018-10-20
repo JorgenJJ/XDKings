@@ -73,7 +73,7 @@
           jDescTxt.setAttribute("class", "descText");
 
           jTitleTxt.innerHTML = obj.launches[i].name;
-          jTimeAndDate.innerHTML = obj.launches[i].windowstart + " UTC";
+          jTimeAndDate.innerHTML = obj.launches[i].windowstart;
           var status = obj.launches[i].status;
           switch (status) {
             case 1:
@@ -90,7 +90,9 @@
               break;
           }
 
-          if (i == 0) nextL = jTimeAndDate //jTimeAndDate.setAttribute("id", "nextLaunch");
+          if (i == 0) {
+            nextL = jTimeAndDate;
+          } //jTimeAndDate.setAttribute("id", "nextLaunch");
 
           jTitle.appendChild(jTitleTxt);
           jTime.appendChild(jTimeAndDate);
@@ -128,7 +130,6 @@
           }
         }
       }
-
       run();
     </script>
   </body>
