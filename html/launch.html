@@ -159,6 +159,8 @@
 
       function error(err) {
         var distance = document.createElement('p');
+        distance.setAttribute("class", "field");
+        distance.setAttribute("id", "launchDistance");
         distance.innerHTML = "Could not find your position";
         document.getElementById("launchDetails").appendChild(distance);
       }
