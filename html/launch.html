@@ -8,7 +8,27 @@
     <title>XDKings</title>
   </head>
   <body>
-    <div id="launch"></div>
+    <div id="header">
+        <a id="back" href="index.html">Back</a>
+    </div>
+    <div id="leftNav">
+    </div>
+    <div id="article">
+      <div id="launchDetails">
+        <div id="tags">
+          <h3 class="field">Mission name:</h3>
+          <h3 class="field">Mission time:</h3>
+          <h3 class="field">Status:</h3>
+          <h3 class="field">Description:</h3>
+        </div>
+        <div id="launch">
+        </div>
+      </div>
+    </div>
+    <div id="rightNav">
+    </div>
+    <div id="footer">
+    </div>
   </body>
   <script>
     var query = window.location.search.substring(1);
@@ -38,16 +58,16 @@
       var status = obj.launches[0].status;
       switch (status) {
         case 1:
-          statusEl.innerHTML = "Confirmed";
-          statusEl.style = "background-color: green";
+          statusEl.innerHTML = "Certain";
+          statusEl.style = "color: #0b6317";
           break;
         case 2:
-          statusEl.innerHTML = "Not confirmed";
-          statusEl.style = "background-color: red";
+          statusEl.innerHTML = "Uncertain";
+          statusEl.style = "color: #700606";
           break;
         default:
           statusEl.innerHTML = "Unknown";
-          statusEl.style = "background-color: gray";
+          statusEl.style = "color: #1e1c1c";
           break;
       }
 
@@ -58,11 +78,17 @@
       readMore.innerHTML = "Read more";
       readMore.setAttribute("href", obj.launches[0].missions[0].wikiURL);
 
+      title.setAttribute("class", "field");
+      date.setAttribute("class", "field");
+      statusEl.setAttribute("class", "field");
+      description.setAttribute("class", "field");
+
+
       document.getElementById("launch").appendChild(title);
       document.getElementById("launch").appendChild(date);
       document.getElementById("launch").appendChild(statusEl);
       document.getElementById("launch").appendChild(description);
-      
+
       console.log(readMore.innerHTML);
       console.log(readMore.innerHTML.length);
       console.log(trim(readMore.innerHTML));

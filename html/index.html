@@ -9,9 +9,6 @@
   </head>
   <body>
     <div id="header">
-      <a href="https://nasa.gov">
-        <img src="../img/logo.png" height="30px;">
-      </a>
     </div>
     <div id="leftNav">
     </div>
@@ -26,8 +23,10 @@
     <div id="rightNav">
     </div>
     <div id="footer">
+      <p id="more" onclick="loadMore()">Load more</p>
     </div>
     <script>
+      var loads = 10;
       var nextL = null;
 
       async function countdownFunc(c) {
@@ -36,8 +35,9 @@
           var m = Math.floor(i / 60);
           var h = Math.floor(m / 60);
           var d = Math.floor(h / 24);
-          if (h == 0) document.getElementById("counter").innerHTML = (m - h * 60) + ":" + (i - m * 60);
-          else if (h == 0 && m == 0) document.getElementById("counter").innerHTML = (i - m * 60);
+          if (d == 0) document.getElementById("counter").innerHTML = (h - d * 24) + ":" + (m - h * 60) + ":" + (i - m * 60);
+          else if (d == 0 && h == 0) document.getElementById("counter").innerHTML = (m - h * 60) + ":" + (i - m * 60);
+          else if (d == 0 && h == 0 && m == 0) document.getElementById("counter").innerHTML = (i - m * 60);
           else document.getElementById("counter").innerHTML = d + ":" + (h - d * 24) + ":" + (m - h * 60) + ":" + (i - m * 60);
           await sleep(1000);
         }
@@ -54,8 +54,8 @@
       function createLaunchBoxes(response) {
         var obj = JSON.parse(response);
 
-        for (var i = 0; i < 10; i++) {
-          var jLaunchInfo = document.createElement("div");
+        for (var i = 0; i < loads; i++) {
+          var jLaunchInfo = document.createElement("a");
           var jTitle = document.createElement("div");
           var jTitleTxt = document.createElement("h3");
           var jTime = document.createElement("div");
@@ -64,6 +64,7 @@
           var jDescTxt = document.createElement("p");
 
           jLaunchInfo.setAttribute("class", "launchInfo");
+          jLaunchInfo.setAttribute("href", "launch.html?id=" + obj.launches[i].id);
           jTitle.setAttribute("class", "title");
           jTitleTxt.setAttribute("class", "titleTxt");
           jTime.setAttribute("class", "time");
@@ -108,18 +109,27 @@
         return count;
       }
 
-      const Http = new XMLHttpRequest();
-      const url = 'https://launchlibrary.net/1.4/launch';
-      Http.open("GET", url);
-      Http.send();
+      function loadMore() {
+        loads += 10;
+        run();
+      }
 
-      Http.onreadystatechange=function() {
-        if(this.readyState==4 && this.status==200) {
-          createLaunchBoxes(Http.responseText);
-          var c = setCounter();
-          countdownFunc(c);
+      function run() {
+        const Http = new XMLHttpRequest();
+        const url = 'https://launchlibrary.net/1.4/launch';
+        Http.open("GET", url);
+        Http.send();
+
+        Http.onreadystatechange=function() {
+          if(this.readyState==4 && this.status==200) {
+            createLaunchBoxes(Http.responseText);
+            var c = setCounter();
+            countdownFunc(c);
+          }
         }
       }
+
+      run();
     </script>
   </body>
 </html>
