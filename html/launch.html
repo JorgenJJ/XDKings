@@ -22,6 +22,8 @@
           <h3 class="field">Description:</h3>
           <h3 class="field">Agency:</h3>
           <h3 class="field">Location:</h3>
+          <h3 class="field">Livestream:</h3>
+          <h3 class="field">Distance:</h3>
         </div>
         <div id="launch">
         </div>
@@ -141,6 +143,7 @@
 
         var distance = document.createElement('p');
         distance.innerHTML = d + "km";
+        distance.setAttribute("class", "field");
         document.getElementById("launch").appendChild(distance);
       }
 
