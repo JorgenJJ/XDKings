@@ -18,7 +18,7 @@
         <div id="tags">
           <h3 class="field">Mission name:</h3>
           <h3 class="field">Mission time:</h3>
-          <h3 class="field">Status:</h3>
+          <h3 class="field">Time confirmation:</h3>
           <h3 class="field">Description:</h3>
           <h3 class="field">Agency:</h3>
           <h3 class="field">Location:</h3>
@@ -62,11 +62,11 @@
       var status = obj.launches[0].status;
       switch (status) {
         case 1:
-          statusEl.innerHTML = "Certain";
+          statusEl.innerHTML = "Confirmed";
           statusEl.style = "color: #0b6317";
           break;
         case 2:
-          statusEl.innerHTML = "Uncertain";
+          statusEl.innerHTML = "Not confirmed";
           statusEl.style = "color: #700606";
           break;
         default:
