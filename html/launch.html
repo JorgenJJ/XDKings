@@ -84,7 +84,7 @@
       }
 
       var agency = document.createElement('p');
-      if (obj.launches[0].missions[0].agencies != null) {
+      if (obj.launches[0].missions[0].agencies != null && obj.launches[0].missions[0].agencies.length != 0) {
         agency.innerHTML = obj.launches[0].missions[0].agencies[0].abbrev + " - " + obj.launches[0].missions[0].agencies[0].name + '<a href="' + obj.launches[0].missions[0].agencies[0].wikiURL + '"> About</a>';
       }
       else {
