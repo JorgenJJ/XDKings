@@ -20,6 +20,8 @@
           <h3 class="field">Mission time:</h3>
           <h3 class="field">Status:</h3>
           <h3 class="field">Description:</h3>
+          <h3 class="field">Agency:</h3>
+          <h3 class="field">Location:</h3>
         </div>
         <div id="launch">
         </div>
@@ -72,31 +74,43 @@
       }
 
       var description = document.createElement('p');
-      var readMore = document.createElement('a');
+      if (!obj.launches[0].missions[0].wikiURL.trim().length == 0) {
+        console.log("test");
+        description.innerHTML = obj.launches[0].missions[0].description + '<a href="' +  obj.launches[0].missions[0].wikiURL + '">Read More</a>';
+      }
+      else {
+        description.innerHTML = obj.launches[0].missions[0].description;
+      }
 
-      description.innerHTML = obj.launches[0].missions[0].description;
-      readMore.innerHTML = "Read more";
-      readMore.setAttribute("href", obj.launches[0].missions[0].wikiURL);
+      var agency = document.createElement('p');
+      agency.innerHTML = obj.launches[0].missions[0].agencies[0].abbrev + " - " + obj.launches[0].missions[0].agencies[0].name + '<a href="' + obj.launches[0].missions[0].agencies[0].wikiURL + '"> About</a>';
+
+      var location = document.createElement('p');
+      location.innerHTML = obj.launches[0].location.pads[0].name;
 
       title.setAttribute("class", "field");
       date.setAttribute("class", "field");
       statusEl.setAttribute("class", "field");
       description.setAttribute("class", "field");
+      agency.setAttribute("class", "field");
+      location.setAttribute("class", "field");
 
 
       document.getElementById("launch").appendChild(title);
       document.getElementById("launch").appendChild(date);
       document.getElementById("launch").appendChild(statusEl);
       document.getElementById("launch").appendChild(description);
+      document.getElementById("launch").appendChild(agency);
+      document.getElementById("launch").appendChild(location);
 
-      console.log(readMore.innerHTML);
-      console.log(readMore.innerHTML.length);
-      console.log(trim(readMore.innerHTML));
-      console.log(trim(readMore.innerHTML).length);
-
-      if (!trim(readMore.innerHTML).length == 0) {
-        document.getElementById("launch").appendChild(readMore);
+      for (var i = 0; i < obj.launches[0].vidURLs.length; i++) {
+        var videoUrl = document.createElement('a');
+        videoUrl.innerHTML = obj.launches[0].vidURLs[i];
+        videoUrl.setAttribute("class", "field");
+        videoUrl.setAttribute("href", obj.launches[0].vidURLs[i]);
+        document.getElementById("launch").appendChild(videoUrl);
       }
+
     }
     </script>
 </html>
