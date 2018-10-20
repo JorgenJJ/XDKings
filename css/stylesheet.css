@@ -30,14 +30,17 @@ body {
   background-color: #000000;
   grid-column: 1/4;
   grid-row: 1/2;
+  width: 100%;
 }
 
 #leftNav {
+  width: 10px;
   grid-column: 1/2;
   grid-row: 2/3;
 }
 
 #rightNav {
+  width: 10px;
   grid-column: 3/4;
   grid-row: 2/3;
 }
